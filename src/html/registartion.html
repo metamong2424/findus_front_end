@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로케이션 등록</title>
+    <script>
+        function validateForm(event) {
+            const latitude = document.getElementById('latitude').value;
+            const longitude = document.getElementById('longitude').value;
+
+            if (latitude < 24.396308 || latitude > 45.551483) {
+                alert('위도는 24.396308에서 45.551483 사이여야 합니다.');
+                event.preventDefault(); // 폼 제출 방지
+                return false;
+            }
+
+            if (longitude < 122.93457 || longitude > 153.986672) {
+                alert('경도는 122.93457에서 153.986672 사이여야 합니다.');
+                event.preventDefault(); // 폼 제출 방지
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>로케이션 등록</h1>
+    <form action="register_location.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm(event)">
+        <label for="placename">장소 이름:</label>
+        <input type="text" id="placename" name="placename" required><br><br>
+
+        <label for="artwork_name">작품 이름:</label>
+        <input type="text" id="artwork_name" name="artwork_name" required><br><br>
+
+        <label for="artwork_season">시즌:</label>
+        <input type="text" id="artwork_season" name="artwork_season"><br><br>
+
+        <label for="artwork_ep">에피소드:</label>
+        <input type="text" id="artwork_ep" name="artwork_ep"><br><br>
+
+        <label for="description">설명:</label>
+        <textarea id="description" name="description"></textarea><br><br>
+
+        <label for="address_region">지역:</label>
+        <select id="address_region" name="address_region" required>
+            <option value="">지역을 선택하세요</option>
+            <option value="시즈오카">시즈오카</option>
+            <option value="도쿄">도쿄</option>
+            <option value="카나가와">카나가와</option>
+            <option value="이시카와">이시카와</option>
+        </select><br><br>
+
+        <label for="address_city">도시:</label>
+        <select id="address_city" name="address_city" required>
+            <option value="">도시를 선택하세요</option>
+            <!-- 시즈오카 -->
+            <option value="누마즈" data-region="시즈오카">누마즈</option>
+            <!-- 도쿄 -->
+            <option value="신주쿠" data-region="도쿄">신주쿠</option>
+            <option value="시부야" data-region="도쿄">시부야</option>
+            <option value="이케부쿠로" data-region="도쿄">이케부쿠로</option>
+            <!-- 카나가와 -->
+            <option value="요코하마" data-region="카나가와">요코하마</option>
+            <option value="가마쿠라" data-region="가마쿠라">가마쿠라</option>
+            <!-- 이시카와 -->
+            <option value="카나자와" data-region="이시카와">카나자와</option>
+            <option value="코마츠" data-region="이시카와">코마츠</option>
+        </select><br><br>
+
+        <label for="address_district">구역:</label>
+        <input type="text" id="address_district" name="address_district"><br><br>
+
+        <label for="latitude">위도:</label>
+        <input type="number" id="latitude" name="latitude" step="0.000001" min="24.396308" max="45.551483" required><br><br>
+
+        <label for="longitude">경도:</label>
+        <input type="number" id="longitude" name="longitude" step="0.000001" min="122.93457" max="153.986672" required><br><br>
+
+        <label for="detailed_address">상세 주소:</label>
+        <input type="text" id="detailed_address" name="detailed_address"><br><br>
+
+        <label for="latestshot">최근 촬영일:</label>
+        <input type="date" id="latestshot" name="latestshot"><br><br>
+
+        <label for="img_place">장소 이미지:</label>
+        <input type="file" id="img_place" name="img_place"><br><br>
+
+        <label for="img_upload">업로드 이미지 1:</label>
+        <input type="file" id="img_upload" name="img_upload"><br><br>
+
+        <label for="img_upload2">업로드 이미지 2:</label>
+        <input type="file" id="img_upload2" name="img_upload2"><br><br>
+
+        <input type="submit" value="등록">
+    </form>
+</body>
+</html>
